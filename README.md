@@ -38,13 +38,25 @@ $env:PORT=3000; npm run dev
 
 ## 后台启动
 
-方式一：直接打开文件
+方式一：复用本地静态服务
+
+```bash
+npm run dev
+```
+
+访问：
+
+```text
+http://localhost:4173/admin/
+```
+
+方式二：直接打开文件
 
 ```bash
 admin/index.html
 ```
 
-方式二：使用本地静态服务
+方式三：使用其他静态服务
 
 ```bash
 python -m http.server 5173
@@ -87,5 +99,5 @@ Password: admin123
 ## 验收关注
 
 - 前台核心路由可通过 `npm run dev` 访问，支持直接打开 `/posts`、`/post/...` 等 history 路径。
-- 后台独立入口为 `admin/index.html`，不占用根路径。
+- 后台独立入口为 `/admin/` 或 `admin/index.html`，不占用根路径。
 - 桌面端和移动端均提供可操作导航、筛选和阅读路径。

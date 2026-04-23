@@ -17,7 +17,11 @@ const types = {
 
 function resolvePath(url) {
   const pathname = decodeURIComponent(new URL(url, `http://localhost:${port}`).pathname);
-  const candidate = normalize(join(root, pathname === "/" ? "index.html" : pathname));
+  const target =
+    pathname === "/" ? "index.html" :
+    pathname === "/admin" || pathname === "/admin/" ? "admin/index.html" :
+    pathname;
+  const candidate = normalize(join(root, target));
   return candidate.startsWith(root) ? candidate : join(root, "index.html");
 }
 
@@ -29,7 +33,7 @@ createServer(async (req, res) => {
     res.writeHead(200, { "content-type": types[extname(filePath)] || "text/plain; charset=utf-8" });
     res.end(body);
   } catch {
-    filePath = join(root, "index.html");
+    filePath = (req.url || "").startsWith("/admin") ? join(root, "admin/index.html") : join(root, "index.html");
     const body = await readFile(filePath);
     res.writeHead(200, { "content-type": types[".html"] });
     res.end(body);
