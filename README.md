@@ -62,10 +62,34 @@ $env:PORT=3000; npm run dev
 
 ## Admin Pages
 
-The admin demo is served by the same local dev server:
+方式一：复用本地静态服务
+
+```bash
+npm run dev
+```
+
+访问：
 
 ```text
 http://localhost:4173/admin/
+```
+
+方式二：直接打开文件
+
+```bash
+admin/index.html
+```
+
+方式三：使用其他静态服务
+
+```bash
+python -m http.server 5173
+```
+
+访问：
+
+```text
+http://localhost:5173/admin/
 ```
 
 Mock account:
@@ -124,5 +148,5 @@ See [docs/git-workflow.md](docs/git-workflow.md) for details.
 ## Verification
 
 - Public routes can be opened through `npm run dev`, including direct history paths such as `/posts` and `/post/...`.
-- Admin routes are isolated under `/admin/`.
+- Admin routes are isolated under `/admin/` or `admin/index.html`.
 - Desktop and mobile layouts should keep navigation, filtering, reading, and editing flows usable.
