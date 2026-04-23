@@ -1,6 +1,40 @@
 # blog
 
-静态 Blog 后台管理界面原型，当前实现重点是后台管理路径、信息架构和可操作控件状态。仓库暂未包含前台页面，后台全部放在 `admin/` 目录中，与未来前台根路径保持分离。
+博客前台与后台静态原型。前台占用根路径，提供访客浏览、筛选、阅读和归档访问；后台放在 `admin/` 目录中，保持访客主流程与管理入口分离。
+
+## 前台启动
+
+```bash
+npm run dev
+```
+
+默认访问地址：
+
+```text
+http://localhost:4173
+```
+
+如需更换端口：
+
+```bash
+PORT=3000 npm run dev
+```
+
+Windows PowerShell：
+
+```powershell
+$env:PORT=3000; npm run dev
+```
+
+## 前台页面
+
+- `/` 首页：站点概览、精选阅读、最近更新。
+- `/posts` 文章列表：支持关键词搜索、分类筛选、标签筛选。
+- `/post/frontend-architecture` 文章详情：正文、标签跳转、相关推荐。
+- `/categories` 分类与标签：分类入口、标签云、标签文章列表。
+- `/archives` 归档：按年份聚合内容。
+- `/about` 关于我：作者介绍和内容方向。
+- 其他路径：进入 404 页面，可返回首页或文章列表。
 
 ## 后台启动
 
@@ -45,12 +79,13 @@ Password: admin123
 
 ## Mock 与后续 API 接入
 
+- 前台内容来自 `src/content.js` 的 mock 数据，字段包含 `id`、`title`、`excerpt`、`category`、`tags`、`date`、`readTime`、`featured`、`cover`、`body`。
 - 后台状态保存在 `localStorage` 的 `blog-admin-state-v1` 中。
-- API 接入点集中预留在 `admin/app.js` 顶部的 `api` 对象中，后续可替换为真实 `fetch` 请求。
+- 后台 API 接入点集中预留在 `admin/app.js` 顶部的 `api` 对象中，后续可替换为真实 `fetch` 请求。
 - 当前保存、发布、归档、开关状态等操作均更新本地状态并给出界面反馈。
 
 ## 验收关注
 
+- 前台核心路由可通过 `npm run dev` 访问，支持直接打开 `/posts`、`/post/...` 等 history 路径。
 - 后台独立入口为 `admin/index.html`，不占用根路径。
-- 桌面端使用侧边导航和内容工作区，移动端导航自动收敛为横向滚动，不阻断查看和编辑路径。
-- 所有核心页面均可通过侧边栏或页面按钮进入，表单控件、筛选、保存、取消、返回和状态切换均可操作。
+- 桌面端和移动端均提供可操作导航、筛选和阅读路径。
