@@ -24,6 +24,7 @@ temp/
 # Editor and OS files
 .DS_Store
 Thumbs.db
+*~
 .idea/
 .vscode/*
 !.vscode/extensions.json
@@ -33,6 +34,21 @@ Thumbs.db
 bin/
 *.test
 *.out
+
+# Backend runtime/build artifacts (keep repo clean)
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.exe
+*.err
+services/backend/*.db
+services/backend/*.db-*
+services/backend/*.sqlite
+services/backend/*.sqlite-*
+services/backend/*.exe
+services/backend/*.err
+services/backend/*.log
 
 # JavaScript package managers
 .pnpm-store/

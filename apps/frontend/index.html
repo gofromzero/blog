@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="一个面向技术写作和项目复盘的个人博客。" />
+    <meta name="color-scheme" content="dark light" />
+    <title>From Zero Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/api/rss" />
+  </head>
+  <body>
+    <div class="progress-bar" id="progressBar"></div>
+    <a class="skip-link" href="#app">跳到正文</a>
+
+    <header class="site-header">
+      <a class="brand" href="/" data-link>
+        <span class="brand-mark">FZ</span>
+        <span>
+          <strong>From Zero</strong>
+          <small>Engineering Notes</small>
+        </span>
+      </a>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换主题" title="切换主题">
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+        <button class="nav-toggle" type="button" aria-label="打开导航" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <nav class="site-nav" aria-label="主导航">
+        <a href="/" data-link>首页</a>
+        <a href="/posts" data-link>文章</a>
+        <a href="/categories" data-link>分类标签</a>
+        <a href="/archives" data-link>归档</a>
+        <a href="/about" data-link>关于</a>
+      </nav>
+    </header>
+
+    <main id="app" tabindex="-1"></main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <strong>From Zero Blog</strong>
+          <span>Engineering Notes &amp; Project Recaps</span>
+        </div>
+        <div class="footer-links">
+          <a href="/api/rss" target="_blank">RSS 订阅</a>
+          <a href="/admin" data-link>管理后台</a>
+        </div>
+        <p class="footer-copy"> 2026 From Zero. Built with Go &amp; Vanilla JS.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script type="module" src="/src/app.js"></script>
+  </body>
+</html>
