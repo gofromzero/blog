@@ -1,32 +1,56 @@
-# blog
+# Blog
 
-博客前台与后台静态原型。前台占用根路径，提供访客浏览、筛选、阅读和归档访问；后台放在 `admin/` 目录中，保持访客主流程与管理入口分离。
+博客项目采用前后端分离的重构方向。当前仓库同时包含可运行的前台/后台静态 demo、工程治理文档、后端预留目录和后续 API 接入边界。
 
-## 前台启动
+## Repository Layout
+
+```text
+apps/
+  frontend/        Public blog frontend application placeholder.
+  admin/           Admin console application placeholder.
+admin/             Current admin static demo.
+src/               Current public blog static demo source.
+services/
+  backend/         Backend service placeholder and future API structure.
+docs/
+  architecture.md  Repository architecture and ownership boundaries.
+  git-workflow.md  Branch, commit, and review conventions.
+```
+
+## Development Boundaries
+
+- `src` and root `index.html` hold the current public blog demo.
+- `admin` holds the current admin console demo.
+- `apps/frontend` is reserved for the future standalone frontend app.
+- `apps/admin` is reserved for the future standalone admin app.
+- `services/backend` is reserved for API, persistence, and backend jobs.
+- Cross-cutting conventions live in `docs`.
+
+## Frontend Dev Server
 
 ```bash
 npm run dev
 ```
 
-默认访问地址：
+Default URL:
 
 ```text
 http://localhost:4173
 ```
 
-如需更换端口：
+Use another port:
 
 ```bash
 PORT=3000 npm run dev
 ```
 
-Windows PowerShell：
+Windows PowerShell:
 
 ```powershell
 $env:PORT=3000; npm run dev
 ```
 
-## 前台页面
+## Public Pages
 
 - `/` 首页：站点概览、精选阅读、最近更新。
 - `/posts` 文章列表：支持关键词搜索、分类筛选、标签筛选。
@@ -36,36 +60,22 @@ $env:PORT=3000; npm run dev
 - `/about` 关于我：作者介绍和内容方向。
 - 其他路径：进入 404 页面，可返回首页或文章列表。
 
-## 后台启动
+## Admin Pages
 
-方式一：直接打开文件
-
-```bash
-admin/index.html
-```
-
-方式二：使用本地静态服务
-
-```bash
-python -m http.server 5173
-```
-
-访问：
+The admin demo is served by the same local dev server:
 
 ```text
-http://localhost:5173/admin/
+http://localhost:4173/admin/
 ```
 
-## 后台账号
-
-当前为 mock 登录，不请求真实接口。
+Mock account:
 
 ```text
 Email: admin@example.com
 Password: admin123
 ```
 
-## 已实现后台路径
+Implemented routes:
 
 - `#/login`：登录页
 - `#/dashboard`：运营看板
@@ -77,15 +87,42 @@ Password: admin123
 - `#/about`：关于我配置，支持头像、简介、社交链接编辑
 - `#/settings`：站点设置，支持站点信息、SEO、评论、维护模式等配置
 
-## Mock 与后续 API 接入
+## Mock And API Migration
 
 - 前台内容来自 `src/content.js` 的 mock 数据，字段包含 `id`、`title`、`excerpt`、`category`、`tags`、`date`、`readTime`、`featured`、`cover`、`body`。
 - 后台状态保存在 `localStorage` 的 `blog-admin-state-v1` 中。
 - 后台 API 接入点集中预留在 `admin/app.js` 顶部的 `api` 对象中，后续可替换为真实 `fetch` 请求。
-- 当前保存、发布、归档、开关状态等操作均更新本地状态并给出界面反馈。
+- 后续真实后端服务和 API 契约放在 `services/backend`。
 
-## 验收关注
+## Git Workflow
 
-- 前台核心路由可通过 `npm run dev` 访问，支持直接打开 `/posts`、`/post/...` 等 history 路径。
-- 后台独立入口为 `admin/index.html`，不占用根路径。
-- 桌面端和移动端均提供可操作导航、筛选和阅读路径。
+Use feature branches instead of committing directly to `master`.
+
+Recommended branch format:
+
+```text
+agent/<role-or-owner>/<short-task-id>
+feature/<scope>/<short-description>
+fix/<scope>/<short-description>
+```
+
+Recommended commit format:
+
+```text
+[type][agent] subject
+```
+
+Examples:
+
+```text
+[chore][dev] initialize blog repository skeleton
+[fix][frontend] serve admin demo from dev server
+```
+
+See [docs/git-workflow.md](docs/git-workflow.md) for details.
+
+## Verification
+
+- Public routes can be opened through `npm run dev`, including direct history paths such as `/posts` and `/post/...`.
+- Admin routes are isolated under `/admin/`.
+- Desktop and mobile layouts should keep navigation, filtering, reading, and editing flows usable.

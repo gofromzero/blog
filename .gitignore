@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Build outputs
+dist/
+build/
+out/
+coverage/
+tmp/
+temp/
+
+# Runtime files
+*.log
+*.pid
+*.seed
+*.local
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Go
+bin/
+*.test
+*.out
+
+# JavaScript package managers
+.pnpm-store/
+.yarn/
+!.yarn/releases/
+!.yarn/plugins/
+!.yarn/sdks/
+!.yarn/versions/
+
+# Cache
+.cache/
+.turbo/
+.next/
+.nuxt/
