@@ -5,6 +5,10 @@ Reserved for the blog backend service.
 Current status: architecture placeholder only. No business API or runtime server
 has been implemented yet.
 
+The first API and data-model contracts are reserved in
+[api/contracts.md](api/contracts.md). Frontend and admin mock data should keep
+the same shape so it can be replaced by real HTTP calls later.
+
 ## Planned Structure
 
 ```text

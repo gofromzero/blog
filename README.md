@@ -116,7 +116,7 @@ Implemented routes:
 - 前台内容来自 `src/content.js` 的 mock 数据，字段包含 `id`、`title`、`excerpt`、`category`、`tags`、`date`、`readTime`、`featured`、`cover`、`body`。
 - 后台状态保存在 `localStorage` 的 `blog-admin-state-v1` 中。
 - 后台 API 接入点集中预留在 `admin/app.js` 顶部的 `api` 对象中，后续可替换为真实 `fetch` 请求。
-- 后续真实后端服务和 API 契约放在 `services/backend`。
+- 后续真实后端服务放在 `services/backend`，首期 API 契约见 `services/backend/api/contracts.md`。
 
 ## Git Workflow
 
