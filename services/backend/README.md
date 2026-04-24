@@ -1,36 +1,71 @@
 # services/backend
 
-Reserved for the blog backend service.
+Blog backend service built with Go, Gin, GORM, and SQLite.
 
-Current status: architecture placeholder only. No business API or runtime server
-has been implemented yet.
+## Features
 
-The first API and data-model contracts are reserved in
-[api/contracts.md](api/contracts.md). Frontend and admin mock data should keep
-the same shape so it can be replaced by real HTTP calls later.
+- RESTful API for posts, categories, tags, comments, archives, and site settings
+- JWT-based admin authentication
+- Markdown content support
+- RSS feed generation
+- SQLite database with auto-migration
+- CORS enabled for frontend integration
+- Seed data for quick start
 
-## Planned Structure
+## Tech Stack
 
-```text
-api/                 API contracts and route documentation.
-cmd/server/          Future service entrypoint.
-configs/             Config examples and templates.
-internal/config/     Config loading and validation.
-internal/handler/    HTTP transport layer.
-internal/model/      Data models and DTOs.
-internal/repository/ Persistence layer.
-internal/service/    Domain services and use cases.
-migrations/          Database migrations.
-scripts/             Backend utility scripts.
-```
+- Go 1.22+
+- Gin (HTTP framework)
+- GORM (ORM)
+- SQLite (embedded database)
+- golang-jwt/jwt (authentication)
+- bcrypt (password hashing)
 
-## Future Run Commands
-
-Add concrete commands when a backend module is introduced:
+## Run
 
 ```bash
+cd services/backend
 go run ./cmd/server
-go test ./...
 ```
 
-Until then, use `git status --short` to verify repository hygiene.
+Or build and run:
+
+```bash
+go build -o server.exe ./cmd/server
+./server.exe
+```
+
+Server runs on `:8080` by default. Configure via `configs/.env`.
+
+## Default Admin
+
+- Email: `admin@blog.local`
+- Password: `admin123`
+
+## API Overview
+
+### Public
+- `GET /api/posts` - List published posts
+- `GET /api/posts/:slug` - Get post detail
+- `GET /api/categories` - List categories
+- `GET /api/tags` - List tags
+- `GET /api/archives` - Archive groups
+- `GET /api/site-settings` - Site info
+- `GET /api/rss` - RSS feed
+- `GET /api/search?q=` - Search posts
+- `GET /api/posts/:slug/comments` - List comments
+- `POST /api/posts/:slug/comments` - Submit comment
+
+### Admin (requires Bearer token)
+- `POST /api/admin/auth/login`
+- `GET /api/admin/posts`
+- `POST /api/admin/posts`
+- `DELETE /api/admin/posts/:id`
+- `GET /api/admin/categories`
+- `POST /api/admin/categories`
+- `GET /api/admin/tags`
+- `POST /api/admin/tags`
+- `GET /api/admin/comments`
+- `PUT /api/admin/comments/:id/approve`
+- `GET /api/admin/site-settings`
+- `PUT /api/admin/site-settings`

@@ -1,7 +1,7 @@
 # Architecture
 
-This repository uses a lightweight monorepo layout so frontend, admin, and
-backend work can progress independently while sharing one Git history.
+This repository uses a lightweight monorepo layout so frontend and backend work
+can progress independently while sharing one Git history.
 
 ## Directory Responsibilities
 
@@ -9,22 +9,15 @@ backend work can progress independently while sharing one Git history.
 apps/frontend
 ```
 
-Public blog frontend. This is where the reader-facing demo and application
-should live. It should not contain backend business logic or persistence code.
-
-```text
-apps/admin
-```
-
-Admin console. This is where content management and operational UI should live.
-It should call backend APIs instead of directly accessing storage.
+Public blog frontend. A vanilla JS SPA with dark-mode UI, API-driven pages,
+embedded admin console (`/admin`), and a static file server.
 
 ```text
 services/backend
 ```
 
-Backend service. This is where HTTP APIs, domain services, persistence adapters,
-configuration, migrations, and background jobs should live.
+Backend service. HTTP APIs, domain services, persistence adapters,
+configuration, migrations, and seed data.
 
 ```text
 docs
@@ -32,31 +25,37 @@ docs
 
 Project-wide architecture, workflow, and operation notes.
 
-## Backend Reserved Structure
-
-The backend structure is intentionally present before business implementation so
-future backend work has stable extension points:
+## Backend Structure
 
 ```text
 services/backend/
-  api/                 API contract files, OpenAPI specs, or route docs.
-  cmd/server/          Future service entrypoint.
-  configs/             Example and environment-specific config templates.
+  api/                 API contract files and route docs.
+  cmd/server/          Service entrypoint.
+  configs/             Config examples and templates.
   internal/config/     Config loading and validation.
-  internal/handler/    HTTP handlers or transport adapters.
+  internal/handler/    HTTP transport layer.
+  internal/middleware/ Authentication middleware.
   internal/model/      Data models and DTOs.
-  internal/repository/ Persistence interfaces and implementations.
+  internal/repository/ Persistence layer.
   internal/service/    Domain services and use cases.
   migrations/          Database migrations.
-  scripts/             Backend-specific operational scripts.
+  scripts/             Operational scripts.
+```
+
+## Frontend Structure
+
+```text
+apps/frontend/
+  index.html           SPA shell.
+  server.js            Static file server (Node built-ins only).
+  src/
+    app.js             Router, API client, page renders, admin dashboard.
+    styles.css         Dark/light theme variables, animations, layout.
 ```
 
 ## Integration Rules
 
-- Frontend and admin apps should depend on backend API contracts, not backend
-  internals.
+- Frontend depends on backend API contracts, not backend internals.
 - Backend packages under `internal` are not shared with apps.
-- Shared conventions should be documented in `docs` first, then extracted into
-  tooling only when real duplication appears.
 - Environment-specific values must stay out of Git; commit only examples such
   as `.env.example`.

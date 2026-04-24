@@ -11,7 +11,7 @@ apps/
 admin/             Current admin static demo.
 src/               Current public blog static demo source.
 services/
-  backend/         Backend service placeholder and future API structure.
+  backend/         Go backend service (Gin + GORM + SQLite).
 docs/
   architecture.md  Repository architecture and ownership boundaries.
   git-workflow.md  Branch, commit, and review conventions.
@@ -23,7 +23,7 @@ docs/
 - `admin` holds the current admin console demo.
 - `apps/frontend` is reserved for the future standalone frontend app.
 - `apps/admin` is reserved for the future standalone admin app.
-- `services/backend` is reserved for API, persistence, and backend jobs.
+- `services/backend` contains the backend implementation (API + persistence).
 - Cross-cutting conventions live in `docs`.
 
 ## Frontend Dev Server
@@ -113,7 +113,7 @@ Implemented routes:
 
 ## Mock And API Migration
 
-- 前台内容来自 `src/content.js` 的 mock 数据，字段包含 `id`、`title`、`excerpt`、`category`、`tags`、`date`、`readTime`、`featured`、`cover`、`body`。
+- 前台 Demo 已改为直接调用后端 API（见 `src/app.js` 顶部的 `API_BASE`）。`src/content.js` 仅作为历史 mock 数据保留。
 - 后台状态保存在 `localStorage` 的 `blog-admin-state-v1` 中。
 - 后台 API 接入点集中预留在 `admin/app.js` 顶部的 `api` 对象中，后续可替换为真实 `fetch` 请求。
 - 后续真实后端服务放在 `services/backend`，首期 API 契约见 `services/backend/api/contracts.md`。

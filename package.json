@@ -1,10 +1,10 @@
 {
-  "name": "blog-frontend",
+  "name": "blog-monorepo",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node server.js",
-    "start": "node server.js"
+    "dev": "node apps/frontend/server.js",
+    "start": "node apps/frontend/server.js"
   }
 }
